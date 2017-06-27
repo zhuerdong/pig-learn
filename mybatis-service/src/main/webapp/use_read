@@ -1,0 +1,2 @@
+1.jetty clean jetty:run -Pdev
+2.mybatis mybatis-generator:generate -e

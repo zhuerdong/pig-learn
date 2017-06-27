@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+   <!--加载con.pig.learn下所有的bean，但是不要加载controller相关注解-->
+    <context:component-scan base-package="com.pig.learn">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+    <task:annotation-driven/>
+
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <import resource="classpath*:mybatis/mysql-datasource.xml"/>
+
+</beans>
