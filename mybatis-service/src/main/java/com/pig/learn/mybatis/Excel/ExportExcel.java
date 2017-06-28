@@ -99,6 +99,7 @@ public class ExportExcel<T> {
             LOGGER.error("下载文件出错-初始化异常!", e);
         }finally {
             try {
+                //注意关闭啊
                 outputStream.close();
             }catch (Exception e){
                 LOGGER.error("下载文件出错-关闭outputStream发生异常!", e);
