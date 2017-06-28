@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 　　　　　┃┫┫　┃┫┫
  * 　　　　　┗┻┛　┗┻┛
  *
- * @Author: zhuerdong
+ * @Author: pig
  * @Date: Created in 下午9:58 17/6/27
  * @Description:mybatis 事务
  */

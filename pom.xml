@@ -16,7 +16,6 @@
     </properties>
 
     <modules>
-        <module>common-tool</module>
         <module>mybatis-service</module>
     </modules>
 
@@ -294,6 +293,19 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-1.2-api</artifactId>
+        </dependency>
+
+        <!--读取07版本的excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.12</version>
         </dependency>
 
     </dependencies>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author daimao  Date: 15/9/30 Time: 下午12:20
+ * @author pig  Date: 15/9/30 Time: 下午12:20
  * @version $Id$
  */
 @Controller
