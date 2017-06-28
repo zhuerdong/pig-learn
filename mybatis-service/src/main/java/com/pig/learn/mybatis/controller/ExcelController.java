@@ -1,7 +1,7 @@
 package com.pig.learn.mybatis.controller;
 
 import com.google.common.collect.Lists;
-import com.pig.learn.mybatis.Excel.ExportExcel;
+import com.pig.learn.mybatis.Excel.ExportExcelUtil;
 import com.pig.learn.mybatis.model.TestExcelModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ public class ExcelController {
     @ResponseBody
     public String check(HttpServletRequest request, HttpServletResponse response) {
 
-        ExportExcel<TestExcelModel> exportExcel = new ExportExcel(request, response, "qws");
+        ExportExcelUtil<TestExcelModel> exportExcel = new ExportExcelUtil(request, response, "qws");
 
         TestExcelModel one = new TestExcelModel(1, "erdong");
         TestExcelModel two = new TestExcelModel(2, "tianyu");

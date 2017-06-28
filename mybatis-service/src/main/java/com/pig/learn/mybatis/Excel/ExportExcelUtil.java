@@ -21,12 +21,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExportExcel<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExportExcel.class);
+public class ExportExcelUtil<T> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExportExcelUtil.class);
 
     private OutputStream outputStream;
 
-    public ExportExcel(HttpServletRequest request, HttpServletResponse response, String fileName) {
+    public ExportExcelUtil(HttpServletRequest request, HttpServletResponse response, String fileName) {
         try {
             outputStream = response.getOutputStream();
             String userAgent = request.getHeader("User-Agent");
@@ -111,38 +111,38 @@ public class ExportExcel<T> {
 
     //设置单元格值
     private void setCellValue(HSSFCell hssfCell, String fieldName, T object) {
-        Object resultObject = null;
+        Object result = null;
         try {
-            resultObject = object.getClass().getMethod("get" + StringUtils.capitalize(fieldName)).invoke(object);
+            result = object.getClass().getMethod("get" + StringUtils.capitalize(fieldName)).invoke(object);
 
         } catch (Exception e) {
             LOGGER.error("未找到 " + "get" + StringUtils.capitalize(fieldName) + " 方法!", e);
         }
-        if (resultObject instanceof Integer) {
-            hssfCell.setCellValue((Integer) resultObject);
-        } else if (resultObject instanceof Double) {
-            hssfCell.setCellValue((Double) resultObject);
-        } else if (resultObject instanceof Float) {
-            hssfCell.setCellValue((Float) resultObject);
-        } else if (resultObject instanceof Long) {
-            hssfCell.setCellValue((Long) resultObject);
-        } else if (resultObject instanceof Boolean) {
-            Boolean resultBoolean = (Boolean) resultObject;
+        if (result instanceof Integer) {
+            hssfCell.setCellValue((Integer) result);
+        }  else if (result instanceof Long) {
+            hssfCell.setCellValue((Long) result);
+        } else if (result instanceof Double) {
+            hssfCell.setCellValue((Double) result);
+        } else if (result instanceof Float) {
+            hssfCell.setCellValue((Float) result);
+        }else if (result instanceof Boolean) {
+            Boolean resultBoolean = (Boolean) result;
             if (resultBoolean) {
                 hssfCell.setCellValue("是");
             } else {
                 hssfCell.setCellValue("否");
             }
-        } else if (resultObject instanceof Date) {
-            Date resultDate = (Date) resultObject;
+        }else if (result instanceof Calendar) {
+            hssfCell.setCellValue((Calendar) result);
+        }  else if (result instanceof Date) {
+            Date resultDate = (Date) result;
             String resultDateString = resultDate.toString();
             hssfCell.setCellValue(resultDateString);
-        } else if (resultObject instanceof Calendar) {
-            hssfCell.setCellValue((Calendar) resultObject);
-        } else if (resultObject instanceof Collection) {
+        } else if (result instanceof Collection) {
             StringBuilder collectionString = new StringBuilder();
 
-            Iterator iterator = ((Collection) resultObject).iterator();
+            Iterator iterator = ((Collection) result).iterator();
             while (iterator.hasNext()) {
                 collectionString.append(iterator.next() + ",");
             }
@@ -152,10 +152,10 @@ public class ExportExcel<T> {
                 hssfCell.setCellValue(collectionString.substring(0, collectionString.length() - 1));
             }
 
-        } else if (null == resultObject) {
+        } else if (null == result) {
             hssfCell.setCellValue("");
         } else {
-            hssfCell.setCellValue(resultObject.toString());
+            hssfCell.setCellValue(result.toString());
         }
     }
 }
