@@ -1,4 +1,4 @@
-package com.pig.learn.mybatis.Date;
+package com.pig.learn.mybatis.date;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

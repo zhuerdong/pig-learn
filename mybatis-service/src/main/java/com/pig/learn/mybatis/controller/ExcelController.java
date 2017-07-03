@@ -1,11 +1,14 @@
 package com.pig.learn.mybatis.controller;
 
 import com.google.common.collect.Lists;
-import com.pig.learn.mybatis.Excel.ExportExcelUtil;
+import com.pig.learn.mybatis.excel.ExportExcelUtil;
+import com.pig.learn.mybatis.excel.ReadExcelUtil;
+import com.pig.learn.mybatis.gson.GsonUtil;
 import com.pig.learn.mybatis.model.TestExcelModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,4 +60,14 @@ public class ExcelController {
 
         return "OK";
     }
+
+    @RequestMapping("/excel/upload")
+    @ResponseBody
+    public String upload(MultipartFile file) {
+        ReadExcelUtil<TestExcelModel> readExcelUtil = new ReadExcelUtil();
+        List<String> filedNameList = Lists.newArrayList("id", "name");
+        List<TestExcelModel> testExcelModels = readExcelUtil.readAll(filedNameList, file, TestExcelModel.class);
+        return GsonUtil.gson.toJson(testExcelModels);
+    }
+
 }

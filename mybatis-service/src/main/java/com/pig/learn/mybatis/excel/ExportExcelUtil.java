@@ -1,5 +1,6 @@
-package com.pig.learn.mybatis.Excel;
+package com.pig.learn.mybatis.excel;
 
+import com.pig.learn.mybatis.constant.LogConstant;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -22,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExportExcelUtil<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExportExcelUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogConstant.ERROR_LOG);
 
     private OutputStream outputStream;
 

@@ -38,7 +38,7 @@
             <AppenderRef ref="FILE"/>
         </Root>
 
-        <logger name="logerror" level="info" additivity="false">
+        <logger name="errorlog" level="info" additivity="false">
             <appender-ref ref="ERROR"/>
         </logger>
 

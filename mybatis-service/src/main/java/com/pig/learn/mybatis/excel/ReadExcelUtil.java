@@ -1,6 +1,8 @@
-package com.pig.learn.mybatis.Excel;
+package com.pig.learn.mybatis.excel;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.pig.learn.mybatis.constant.LogConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,12 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ReadExcelUtil<T> {
-    private static final Logger ERROR_LOGGER = LoggerFactory.getLogger(ReadExcelUtil.class);
+    private static final Logger ERROR_LOGGER = LoggerFactory.getLogger(LogConstant.ERROR_LOG);
 
     /**
      * 读取excel返回映射的实体类list
@@ -35,22 +36,24 @@ public class ReadExcelUtil<T> {
                 throw new IllegalArgumentException("属性名不能为空");
             }
         }
-        if (file == null) {
+        if (null == file) {
             throw new IllegalArgumentException("请上传文件");
         }
         String fileName = file.getOriginalFilename();
         String suffix = fileName.substring(fileName.lastIndexOf("."));
-        List<T> objects = new ArrayList<T>();
+        List<T> objects = Lists.newArrayList();
 
         try {
             Workbook wb = null;
-            if (".xls".equals(suffix)) {// 2003
+            // 读取2003
+            if (".xls".equals(suffix)) {
                 // 读取Excel
                 wb = new HSSFWorkbook(file.getInputStream());
-            } else if (".xlsx".equals(suffix)) {// 2007
+                //读取2007
+            } else if (".xlsx".equals(suffix)) {
                 wb = new XSSFWorkbook(file.getInputStream());
             }
-            if (wb == null) {
+            if (null == wb) {
                 return null;
             }
             // 获取sheet数目

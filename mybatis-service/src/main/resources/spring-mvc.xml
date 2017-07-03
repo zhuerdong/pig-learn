@@ -9,8 +9,9 @@
 		                         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		                           ">
-
+    <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
+
     <!--加载controller的注解-->
     <context:component-scan base-package="com.pig.learn.mybatis.controller">
     </context:component-scan>
@@ -35,4 +36,8 @@
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </bean>
 
+    <!-- 定义无需Controller的url<->view直接映射 -->
+    <!-- 如果这个生效，必须把index.jsp那个文件删除掉 -->
+    <!--不用-->
+    <!--<mvc:view-controller path="/" view-name="redirect:/getPortal"/>-->
 </beans>
