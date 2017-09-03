@@ -1,0 +1,2 @@
+BlockingQueue<Runnable> workQueue = new LinkedBlockingDeque<>();
+ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1,2,20,TimeUnit.SECONDS,workQueue,new ThreadFactoryBuilder().setNameFormat("XX-task-%d").build());

@@ -1,0 +1,100 @@
+git初始设置及基本命令使用
+
+注意：初始化之后，在自己的工程下面加上 .gitignore文件，这样就不会把一些不必须的文件上传到github上了
+一、设置姓名和邮箱地址
+首先来设置使用 Git 时的姓名和邮箱地址。名字请用英文输入
+  $ git config --global user.name "Firstname Lastname"
+  $ git config --global user.email "your_email@example.com"
+这个命令,会在“~/.gitconfig”中以如下形式输出设置文件
+name = Firstname Lastname
+email = your_email@example.com
+
+二、提高命令输出的可读性
+顺便一提,将 color.ui 设置为 auto 可以让命令的输出拥有更高的可读性
+$ git config --global color.ui auto
+“~/.gitconfig”中会增加下面一行。
+ui = auto
+
+三、git基本操作
+1.git init 初始化仓库（注意应当在指定的工作目录下进行初始化才是友好的）
+要使用 Git 进行版本管理,必须先初始化仓库。Git 是使用 g i t init命令进行初始化的。请实际建立一个目录并初始化仓库。顺序执行下面的命令
+mkdir git-tutorial
+cd git-tutorial
+git init
+Initialized empty Git repository in /Users/hirocaster/github/github-book /git-tutorial/.git/
+如果初始化成功,执行了 git init命令的目录下就会生成 .git 目 录。这个 .git 目录里存储着管理当前目录内容所需的仓库数据。
+在 Git 中,我们将这个目录的内容称为“附属于该仓库的工作树”。 文件的编辑等操作在工作树中进行,然后记录到仓库中,以此管理文件 的历史快照。如果想将文件恢复到原先的状态,可以从仓库中调取之前 的快照,在工作树中打开。开发者可以通过这种方式获取以往的文件。 具体操作指令我们将在后面详细解说。
+
+2.git status——查看仓库的状态
+git status命令用于显示 Git 仓库的状态。这是一个十分常用的 命令,请务必牢记。
+工作树和仓库在被操作的过程中,状态会不断发生变化。在 Git 操 作过程中时常用 git status命令查看当前状态,可谓基本中的基本。 下面,就让我们来实际查看一下当前状态。
+$ git status
+#  On branch master #
+#  Initial commit
+#
+nothing to commit (create/copy files and use "git add" to track
+结果显示了我们当前正处于 master 分支下。关于分支我们会在不久 后讲到,现在不必深究。接着还显示了没有可提交的内容。所谓提交(Commit),是指“记录工作树中所有文件的当前状态”。 尚没有可提交的内容,就是说当前我们建立的这个仓库中还没有记录任何文件的任何状态。这里,我们建立 README.md 文件作为管理对象,为第一次提交做前期准备。
+
+3.git add——向暂存区中添加文件(git add --all)
+
+要想让文件成为 Git 仓库的管理对象,就需要用 git add命令将其 加入暂存区(Stage 或者 Index)中。暂存区是提交之前的一个临时区域。
+
+4.git commit——保存仓库的历史记录(git commit -m "提交代码")
+git commit命令可以将当前暂存区中的文件实际保存到仓库的历史记录中。通过这些记录,我们就可以在工作树中复原文件
+
+5.git log——查看提交日志
+g i t l o g命令可以查看以往仓库中提交的日志。包括可以查看什么人在什么时候进行了提交或合并,以及操作前后有怎样的差别。关于 合并我们会在后面解说。我们先来看看刚才的git commit命令是否被记录了。
+$ git log
+commit 9f129bae19b2c82fb4e98cde5890e52a6c546922 Author: hirocaster <hohtsuka@gmail.com>
+Date: Sun May 5 16:06:49 2013 +0900
+First commit
+如上图所示,屏幕显示了刚刚的提交操作。commit 栏旁边显示的 “9f129b......”是指向这个提交的哈希值。Git 的其他命令中,在指向提
+交时会用到这个哈希值。
+Author 栏中显示我们给 Git 设置的用户名和邮箱地址。Date 栏中显
+示提交执行的日期和时间。再往下就是该提交的提交信息
+
+
+6.git log --pretty=short ——只显示提交信息的第一行
+
+7.git log README.md 只显示指定目录、文件的日志
+
+8.git  log -p README.md 显示文件的改动
+
+9.git diff head——查看工作树和最新提交的差别
+
+10.git branch——显示分支一览表
+git branch命令可以将分支名列表显示,同时可以确认当前所在 分支。
+
+11.git checkout -b——创建、切换分支
+这个命令等同于下面的命令
+$ git branch feature-A  创建分支
+$ git checkout feature-A 切换分支
+
+12.git checkout master 切换到 master 分支
+
+13.git checkout -  切换回上一个分支 这个很有用
+
+14.git merge——合并分支
+一般来说，是先将master的代码合并到本地develop分支，然后再将develop分支合并到线上master
+
+15.git log --graph——以图表形式查看分支
+git log --graph命令可以用图表形式输出提交日志,非常直 观,请大家务必记住。
+
+16.更改提交操作 git reset(非常重要) 彻底回退到某个版本，本地的源码也会变为上一个版本的内容
+有的时候，如果已经commit了，如何取消commit呢，或者说回到提交某个commit之前的版本
+首先使用git log 查看 commit日志，找其对应的版本的commit_id，然后使用下面命令
+git reset --hard fd0cbf0d4a25f747230694d95cac1be72d33441d 就可以回到fd0cbf0d4a25f747230694d95cac1be72d33441d这个版本
+git reset --soft 这个是常用的
+
+17.git remote add——添加远程仓库
+在 GitHub 上创建的仓库路径为“git@github.com:用户名 / git-tutorial.git”。现在我们用 git remote add命令将它设置成本地仓库的远程仓库，按照上述格式执行git remote add命令之后,Git会自动将 git@github.com:github-book/git-tutorial.git远程仓库的 名称设置为 origin(标识符)。
+
+18.git push——推送至远程仓库
+git push  origin master
+
+19.git clone——获取远程仓库
+首先我们换到其他目录下,将 GitHub 上的仓库 clone 到本地。注意不要与之前操作的仓库在同一目录下。
+
+20.git pull——获取最新的远程仓库分支（git pull origin develop）
+我们就可以使用git pull命令,将本地的分支更新到最新状态，也可以指定某一个分支来更新。GitHub 端远程仓库中的分支是最新状态,所以本地仓库 中的 feature-D 分支就得到了更新。今后只需要像平常一样在本地进行提 交再 push 给远程仓库,就可以与其他开发者同时在同一个分支中进行 作业,不断给 feature-D 增加新功能。如果两人同时修改了同一部分的源码,push 时就很容易发生冲 突。
+所以多名开发者在同一个分支中进行作业时,为减少冲突情况的发 生,建议更频繁地进行 push 和 pull 操作

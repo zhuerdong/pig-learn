@@ -1,0 +1,101 @@
+1.git 清除错误修改的文件
+本地修改了一些文件，其中包含新增的，修改的，删除的，但是不要了希望能将代码revert掉，使用revert或者reset都无法完成恢复，只会恢复了修改的文件，但是没有删除新增的和恢复删除的
+使用如下命令：
+git checkout . && git clean -df可以完全恢复，恢复所有修改的文件
+git checkout . 的意思是放弃本地修改、没有提交的恢复到修改前的版本
+git clean -df 是从工作目录中移除没有trackd的文件
+
+-----------------------------------------------------------------------------------
+
+2.mac .bash_profile文件配置错误的修改方法
+一旦 .bash_profile文件配置错误，那么基本的命令可能就无法使用
+此时想要恢复基本命令的花，执行
+export PATH=/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+执行此命令，恢复
+
+-----------------------------------------------------------------------------------
+mac 配置多个ssh key分别登陆公司git和git hub
+
+1.生成一个公司用的SSH-Key
+$ ssh-keygen -t rsa -C "youremail@yourcompany.com” -f ~/.ssh/id_rsa
+第一次使用时无法创建，我使用了 ssh-keygen -t rsa -C “haiyan.xu.vip@gmail.com”这个
+命令就可以了
+
+ 在~/.ssh/目录会生成id-rsa和id-rsa.pub私钥和公钥。 我们将id-rsa.pub中的内容粘帖到公司github服务器的SSH-key的配置中。
+
+
+2.生成一个github用的SSH-Key
+$ ssh-keygen -t rsa -C "youremail@your.com” -f ~/.ssh/github_id_rsa
+在~/.ssh/目录会生成github-rsa和github-rsa.pub私钥和公钥。 我们将github_id_rsa.pub中的内容粘帖到github服务器的SSH-key的配置中。
+
+3.添加私钥
+$ ssh-add ~/.ssh/id_rsa
+$ ssh-add ~/.ssh/github_id_rsa
+如果执行ssh-add时提示"Could not open a connection to your authentication agent"，可以现执行命令：
+$ ssh-agent bash
+然后再运行ssh-add命令。
+# 可以通过 ssh-add -l 来确私钥列表
+$ ssh-add -l
+# 可以通过 ssh-add -D 来清空私钥列表
+$ ssh-add -D
+
+4.修改配置文件
+在 ~/.ssh 目录下新建一个config文件
+touch config
+添加内容：
+# company
+Host <your company host>
+    HostName <your company host>
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+# github
+Host github.com
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/github_id_rsa
+
+5.目录结构
+ total 48
+-rw-r--r--  1 pig  staff   216B  6 18 15:43 config
+-rw-------  1 pig  staff   1.6K  6 18 15:38 github_id_rsa
+-rw-r--r--  1 pig  staff   402B  6 18 15:38 github_id_rsa.pub
+-rw-------  1 pig  staff   1.6K  9 20  2016 id_rsa
+-rw-r--r--  1 pig  staff   408B  9 20  2016 id_rsa.pub
+-rw-r--r--  1 pig  staff   3.2K  6 18 15:49 known_hosts
+
+6.测试
+$ ssh -T git@github.com
+输出
+Hi zhuerdong! You've successfully authenticated, but GitHub does not provide shell access.
+就表示成功的连上github了.也可以试试链接公司的git.
+
+7.根据上述配置了Host，那么你多个账号下面的提交用户会是一个人，所以需要通过命令git config --global --unset user.email删除用户账户设置，在每一个repo下面使用git config --local user.email '你的github邮箱@mail.com' 命令单独设置用户账户信息，即可；
+-----修改 提交时候的用户名 和邮箱
+1、查看git下面用户信息（.后面按“tab”键出现）
+
+2、git config user.name '填写name'
+3、git config user.email '填写邮箱'
+
+-----------------------------------------------------------------------------------
+
+git使用总结
+# 从远程仓库克隆到本地
+$ git clone [url]
+
+# 新建一个分支，但依然停留在当前分支
+$ git branch [branch-name]
+
+# 新建一个分支，并切换到该分支
+$ git checkout -b [branch]
+
+# 删除本地分支
+$ git branch -d [branch-name]
+
+#git将代码提交到仓库过程
+1.git add —all  #提交所有修改
+2.git commit -m “修改代码原因” #将修改代码提交到本地
+3.Git push origin develop #将代码推到git仓库的develop分支上
+
+#代码暂存
+git stash
+git stash pop
