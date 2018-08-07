@@ -27,7 +27,9 @@ public class VerySimpleLeaveProcessTest {
         RuntimeService runtimeService = engine.getRuntimeService();
 
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById("leave");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leave");
+
+        System.out.println("pid="+processInstance.getId()+",pdid="+processInstance.getProcessDefinitionId());
 
     }
 }
