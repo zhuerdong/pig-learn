@@ -149,17 +149,25 @@
 
         </plugins>
 
+
     </build>
 
+
+
+
     <profiles>
+
+
         <profile>
             <id>dev</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <property>
                     <name>env_config</name>
                     <value>dev</value>
                 </property>
             </activation>
+
             <build>
                 <resources>
                     <resource>
@@ -199,5 +207,6 @@
             </properties>
         </profile>
     </profiles>
+
 
 </project>

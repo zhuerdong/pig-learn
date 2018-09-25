@@ -1,8 +1,11 @@
 package com.pig.learn.mybatis.annotation;
 
-public class UseAnnotation {
-    //@ParmCheck(userId = true);
-    public void test(){
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-    }
-}
+//public class UseAnnotation {
+//    public static void main(String[] args) {
+//        ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");
+//        ac.getBean("");
+//    }
+//}
