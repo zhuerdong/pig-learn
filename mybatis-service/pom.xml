@@ -14,6 +14,16 @@
     <!--jar包依赖-->
     <dependencies>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
     <name>mybatis-service Maven Webapp</name>
     <url>http://maven.apache.org</url>

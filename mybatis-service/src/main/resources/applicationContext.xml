@@ -11,9 +11,9 @@
      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
    <!--加载con.pig.learn下所有的bean，但是不要加载controller相关注解-->
-    <context:component-scan base-package="com.pig.learn">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+    <!--<context:component-scan base-package="com.pig.learn">-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
+    <!--</context:component-scan>-->
 
     <!--注解-->
     <!--//通过aop命名空间的-->

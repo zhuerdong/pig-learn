@@ -1,0 +1,14 @@
+package com.pig.learn.mybatis.spi.spiRouterByAnnoation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface SpiAnnotation {
+
+    String value() default "";
+
+}
