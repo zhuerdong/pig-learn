@@ -1,6 +1,7 @@
 package com.pig.learn.mybatis.controller;
 
 import com.pig.learn.mybatis.domain.User;
+import com.pig.learn.mybatis.gson.GsonUtil;
 import com.pig.learn.mybatis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class TestController {
     public String check() {
         User user = userMapper.selectByPrimaryKey(1);
 
-        return "OK";
+
+        return GsonUtil.gson.toJson(user);
     }
 }

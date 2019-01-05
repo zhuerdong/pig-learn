@@ -1,2 +1,5 @@
 1.jetty clean jetty:run -Pdev
 2.mybatis mybatis-generator:generate -e
+
+访问地址：
+http://127.0.0.1:8412/Log
