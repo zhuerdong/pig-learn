@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class SpiRouter implements ApplicationContextAware,InitializingBean{
+public class SpiAnnotationRouter implements ApplicationContextAware,InitializingBean{
 
     private static ApplicationContext applicationContext;
 

@@ -1,4 +1,4 @@
-package com.pig.learn.mybatis.spi.spiRouterByAnnoation;
+package com.pig.learn.mybatis.spi.spiRouterByInterfaceSimple;
 
 import com.pig.learn.mybatis.spi.Handler;
 import org.springframework.stereotype.Controller;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/test")
-public class SpiAnnoationController {
+public class SpiControllerSimple {
 
 
-    @RequestMapping("/SpiAnnotation")
+    @RequestMapping("/Spi")
     @ResponseBody
     public void check( @RequestParam("handlerType") String handlerType) {
 
-        Handler handler = SpiAnnotationRouter.getSpi(Handler.class,handlerType);
+        Handler handler = SpiRouterSimple.getSpi(handlerType);
 
         System.out.println(handler.getHandleName());
         handler.process();
