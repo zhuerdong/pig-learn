@@ -40,6 +40,8 @@
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </bean>
 
+    <!--<bean id="serviceContextManager" class="com.pig.learn.mybatis.threadlocal.ServiceContextManager"></bean>-->
+
     <aop:aspectj-autoproxy />
 
     <!-- 定义无需Controller的url<->view直接映射 -->

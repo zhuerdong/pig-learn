@@ -5,3 +5,7 @@
 http://127.0.0.1:8412/Log
 http://127.0.0.1:8412/test/SpiAnnotation?handlerType=1
 http://127.0.0.1:8412/test/Spi?handlerType=bhander
+
+
+
+http://127.0.0.1:8412/thread/check
